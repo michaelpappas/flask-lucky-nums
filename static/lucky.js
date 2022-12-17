@@ -28,7 +28,7 @@ function getFormValues(evt) {
   const year = evt.target.year.value;
   const email = evt.target.email.value;
   const color = evt.target.color.value;
-
+  debugger;
   return {name: name, year: year, email: email, color: color};
 }
 

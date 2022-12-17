@@ -21,7 +21,6 @@ def return_lucky_num():
     """
     year = request.json['year']
     errors = error_check(request.json)
-
     number_data = num_request()
     year_data = year_request(year)
 
@@ -32,32 +31,54 @@ def return_lucky_num():
 def error_check(data):
     resp = {}
     resp['errors'] = {}
-    try:
-        data['name']
-    except:
+
+    if data['name'] == '':
         resp['errors']['name']=["This field is required."]
-
-    try:
-        data['email']
-    except:
+    if data['email'] == '':
         resp['errors']['email']=["This field is required."]
-
-    try:
-        data['year']
-    except:
+    if data['year'] == '':
         resp['errors']['year']=["This field is required."]
-
-    try:
-        data['color']
-    except:
-        resp['errors']['color']=["This field is required."]
 
     if data['color'] not in ['red', 'green', 'orange', 'blue']:
         resp['errors']['color']=["Invalid value, must be one of: red, green, orange, blue."]
+
     if resp['errors'] == {}:
         return None
+
     else:
         return resp
+
+# def error_check(data):
+#     resp = {}
+#     resp['errors'] = {}
+#     try:
+#         data['name']
+#     except:
+#         resp['errors']['name']=["This field is required."]
+
+#     try:
+#         data['email']
+#     except:
+#         resp['errors']['email']=["This field is required."]
+
+#     try:
+#         data['year']
+#     except:
+#         resp['errors']['year']=["This field is required."]
+
+#     try:
+#         data['color']
+#     except:
+#         resp['errors']['color']=["This field is required."]
+
+#     if data['color'] not in ['red', 'green', 'orange', 'blue']:
+#         resp['errors']['color']=["Invalid value, must be one of: red, green, orange, blue."]
+
+#     if resp['errors'] == {}:
+#         return None
+
+#     else:
+#         return resp
 
 def num_request():
     """ generates and random number and returns JSON of number and fact about number"""
