@@ -26,13 +26,12 @@ def return_lucky_num():
     year_data = year_request(year)
 
     if errors:
-        return jsonify(errors), 200
+        return jsonify(errors)
     return jsonify(number_data, year_data)
 
 def error_check(data):
     resp = {}
     resp['errors'] = {}
-
 
     if data['name'] == '':
         resp['errors']['name']=["This field is required."]
