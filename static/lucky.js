@@ -58,7 +58,7 @@ function getFormValues(evt) {
   return {name: name.value,
           year: year.value,
           email: email.value,
-          color: color.value};
+          color: color.value.toLowerCase()};
 }
 /** Post request of form values to API */
 async function postForm(values){
