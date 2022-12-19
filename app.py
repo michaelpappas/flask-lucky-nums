@@ -30,6 +30,10 @@ def return_lucky_num():
     return jsonify(number_data, year_data), 201
 
 def error_check(data):
+    """ Checks the POST request for missing inputs.
+        If an error does exist the appropriate response will be returned
+        in a dictionary
+        If no errors are present an empty dictionary will be returned."""
     resp = {}
     resp['errors'] = {}
 
@@ -45,7 +49,6 @@ def error_check(data):
 
     if resp['errors'] == {}:
         return None
-
     else:
         return resp
 

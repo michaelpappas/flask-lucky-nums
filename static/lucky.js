@@ -1,3 +1,6 @@
+'use strict'
+
+const BASE_URL = "http://localhost:5001"
 const $form = $("form")
 const $nameErr = $("#name-err")
 const $emailErr = $("#email-err")
@@ -14,14 +17,13 @@ async function processForm(evt) {
   evt.preventDefault()
 
   const formValues = getFormValues(evt);
-  resp = await postForm(formValues)
+  let resp = await postForm(formValues)
   if(resp.errors){
     showErrors(resp)
   }
   else{
     showResults(resp[0].num, resp[1].year)
   }
-
 }
 
 /** showErrors: show error messages in DOM. */
@@ -51,6 +53,7 @@ function showResults(num, year) {
   $results.html(`<p>Your lucky number is ${num.num} (${num.fact})</p>
                 <p> Your birth year (${year.year}) fact is ${year.fact}</p>`)
 }
+
 /** Retrieves form input values and formats them for post */
 function getFormValues(evt) {
   const {name, year, email, color} = evt.target;
@@ -60,9 +63,10 @@ function getFormValues(evt) {
           email: email.value,
           color: color.value.toLowerCase()};
 }
+
 /** Post request of form values to API */
 async function postForm(values){
-  response = await axios.post('http://localhost:5001/api/get-lucky-num', values)
+  let response = await axios.post(`${BASE_URL}/api/get-lucky-num`, values)
   return response.data
 }
 
